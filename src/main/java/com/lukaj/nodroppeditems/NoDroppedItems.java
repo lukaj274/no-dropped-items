@@ -34,7 +34,7 @@ public class NoDroppedItems implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			dispatcher.register(Commands.literal("ndi").executes(context -> {
+			dispatcher.register(Commands.literal("ndi").requires(source -> source.hasPermission(2)).executes(context -> {
 				active = !active;
 				String message = active ? "Now removing dropped items" : "No longer removing dropped items";
 				context.getSource().sendSuccess(() -> Component.literal(message), false);
